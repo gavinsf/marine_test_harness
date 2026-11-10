@@ -1,7 +1,10 @@
 // https://aprs.gids.nl/nmea/
-#include "builder.hpp"
-#include "checksum.hpp"
+#include "sim/builder.hpp"
+#include "common/checksum.hpp"
+#include "common/utc.hpp"
 #include <initializer_list>
+#include <cmath>
+#include <format>
 
 std::string join(std::initializer_list<std::string> fields) {
     std::string out;
@@ -18,6 +21,30 @@ std::string frame(const std::string& body) {
     char tail[8];
     std::snprintf(tail, sizeof tail, "*%02X\r\n", checksum(body));
     return "$" + body + tail;
+}
+
+std::string fmtLat(double lat) {
+     lat = std::fabs(lat);
+    int deg = static_cast<int>(lat);
+    double min = (lat - deg) * 60.0;
+    if (min >= 59.99995) { min = 0.0; ++deg; }   // avoid "60.0000"
+    char buf[16];
+    std::snprintf(buf, sizeof buf, "%02d%07.4f", deg, min);
+    return buf;
+}
+
+std::string fmtLon(double lon) {            // dddmm.mmmm
+    lon = std::fabs(lon);
+    int deg = static_cast<int>(lon);
+    double min = (lon - deg) * 60.0;
+    if (min >= 59.99995) { min = 0.0; ++deg; }
+    char buf[16];
+    std::snprintf(buf, sizeof buf, "%03d%07.4f", deg, min);
+    return buf;
+}
+
+std::string fmtFixed(double v, int decimals) {
+    return std::format("{:.{}f}", v, decimals);
 }
 
 std::string hemiNS(double lat) { return lat >= 0 ? "N" : "S"; }

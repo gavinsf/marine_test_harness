@@ -1,8 +1,11 @@
 #pragma once
 #include <string>
 #include <cstdio>
-#include "ship_state.hpp"
-#include "initializer_list"
+#include "common/ship_state.hpp"
+
+std::string fmtLat(double lat);
+std::string fmtLon(double lon);
+std::string fmtFixed(double v, int decimals);
 
 std::string gga(const ShipState& s);
 std::string rmc(const ShipState& s);

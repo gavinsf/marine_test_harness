@@ -1,4 +1,5 @@
-#include "checksum.hpp"
+#include "common/checksum.hpp"
+#include <cstdint>
 
 uint8_t checksum(std::string_view body) {
     uint8_t cs = 0;

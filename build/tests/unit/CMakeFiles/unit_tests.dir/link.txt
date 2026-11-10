@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/unit_tests.dir/checksum_test.cpp.o CMakeFiles/unit_tests.dir/builder_test.cpp.o -o unit_tests  ../../src/common/libcommon.a ../../src/sim/libsim.a ../../lib/libgtest_main.a ../../src/common/libcommon.a ../../lib/libgtest.a 

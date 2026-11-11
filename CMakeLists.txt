@@ -10,4 +10,5 @@ enable_testing()
 
 add_subdirectory(src/common)
 add_subdirectory(src/sim)
+add_subdirectory(src/udp)
 add_subdirectory(tests/unit)

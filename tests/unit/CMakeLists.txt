@@ -9,8 +9,10 @@ FetchContent_MakeAvailable(googletest)
 add_executable(unit_tests
     checksum_test.cpp
     builder_test.cpp
+    udp_receiver_test.cpp
+    udp_sender_test.cpp
 )
-target_link_libraries(unit_tests PRIVATE common sim GTest::gtest_main)
+target_link_libraries(unit_tests PRIVATE common sim udp GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(unit_tests)

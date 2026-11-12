@@ -12,3 +12,4 @@ std::string rmc(const ShipState& s);
 std::string hdt(const ShipState& s);
 std::string dpt(const ShipState& s);
 std::string frame(const std::string& body);
+std::string mwv(const ShipState& s);

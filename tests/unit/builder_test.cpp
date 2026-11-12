@@ -154,3 +154,22 @@ TEST(PositionFormat, Req002_HemisphereIndicatorsInRmc) {
     s.lat = -33.8688; s.lon = -151.2093;
     EXPECT_NE(rmc(s).find(",A,3352.1280,S,15112.5580,W,"), std::string::npos) << rmc(s);
 }
+
+// ---- Wind (MWV) ----
+
+TEST(SentenceBuilder, MwvHasCorrectChecksumTalkerAndFields) {
+    ShipState s = sampleState();
+    s.wind_angle = 214.8;
+    s.wind_speed = 12.34;
+    const std::string m = mwv(s);
+    EXPECT_TRUE(hasValidChecksum(m)) << m;
+    EXPECT_EQ(bodyOf(m), "WIMWV,214.8,R,12.3,N,A");
+    EXPECT_EQ(m.substr(0, 7), "$WIMWV,");
+}
+
+TEST(SentenceBuilder, MwvRoundsAndZeroPads) {
+    ShipState s = sampleState();
+    s.wind_angle = 0.0;
+    s.wind_speed = 0.04;
+    EXPECT_EQ(bodyOf(mwv(s)), "WIMWV,0.0,R,0.0,N,A");
+}

@@ -70,3 +70,8 @@ std::string dpt(const ShipState& s) {
     return frame(join({"SDDPT", fmtFixed(s.depth, 1), "0.0"}));
 }
 
+// Wind speed and angle: $WIMWV,<angle>,R,<speed>,N,A  (relative, knots, valid)
+std::string mwv(const ShipState& s) {
+    return frame(join({"WIMWV", fmtFixed(s.wind_angle, 1), "R",
+                       fmtFixed(s.wind_speed, 1), "N", "A"}));
+}

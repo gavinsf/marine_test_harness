@@ -12,6 +12,8 @@ add_executable(unit_tests
     udp_receiver_test.cpp
     udp_sender_test.cpp
     parser_test.cpp
+    injector_test.cpp
+    ground_truth_test.cpp
 )
 target_link_libraries(unit_tests PRIVATE common sim udp GTest::gtest_main)
 
